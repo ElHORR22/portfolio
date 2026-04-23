@@ -5,141 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Haroun Dorbez — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-  :root { --black:#0a0a0a; --white:#f5f4f0; --mid:#888; --border:rgba(10,10,10,0.12); }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif;font-weight:300;font-size:15px;line-height:1.7;cursor:none;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9999;}
+<link rel="stylesheet" href="index.css">
 
-  #cursor{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--black);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .25s,height .25s;}
-  #cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid var(--black);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
-  body.hovering #cursor{width:6px;height:6px;}
-  body.hovering #cursor-ring{width:56px;height:56px;}
-
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 52px;}
-  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:.06em;text-decoration:none;color:var(--black);}
-  .nav-links{display:flex;gap:32px;list-style:none;}
-  .nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--black);text-decoration:none;opacity:.45;transition:opacity .3s;}
-  .nav-links a:hover,.nav-links a.active{opacity:1;}
-
-  #hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 64px;position:relative;border-bottom:1px solid var(--border);}
-  .hero-side{position:absolute;top:50%;right:52px;transform:translateY(-50%);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);writing-mode:vertical-rl;}
-  .hero-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:24px;opacity:0;animation:fadeUp .8s .2s forwards;}
-  .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,9.5vw,132px);font-weight:300;line-height:.9;letter-spacing:-.01em;opacity:0;animation:fadeUp .9s .4s forwards;}
-  .hero-name em{font-style:italic;}
-  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:48px;opacity:0;animation:fadeUp .8s .7s forwards;}
-  .hero-desc{max-width:400px;font-size:14px;color:var(--mid);line-height:1.85;}
-  .hero-cta{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:4px;transition:gap .3s;}
-  .hero-cta:hover{gap:20px;}
-  .hero-cta::after{content:'→';}
-
-  section{padding:120px 52px;border-bottom:1px solid var(--border);}
-  .section-header{display:flex;align-items:baseline;gap:20px;margin-bottom:80px;}
-  .section-num{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);min-width:40px;}
-  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,62px);font-weight:300;line-height:1;letter-spacing:-.01em;}
-  .section-line{flex:1;height:1px;background:var(--border);margin-left:auto;}
-
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-  .about-text p{font-size:16px;line-height:1.9;margin-bottom:22px;color:#2a2a2a;}
-  .about-text p:first-child{font-family:'Cormorant Garamond',serif;font-size:23px;font-style:italic;font-weight:300;line-height:1.65;color:var(--black);}
-  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
-  .stat{background:var(--white);padding:30px 26px;}
-  .stat-num{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;line-height:1;margin-bottom:8px;}
-  .stat-label{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--mid);}
-
-  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-  .skill-cat{background:var(--white);padding:38px 34px;transition:background .3s;}
-  .skill-cat:hover{background:var(--black);}
-  .skill-cat:hover .skill-cat-title,.skill-cat:hover .skill-item{color:var(--white);}
-  .skill-cat-icon{font-size:20px;margin-bottom:18px;display:block;}
-  .skill-cat-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;margin-bottom:18px;transition:color .3s;}
-  .skill-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
-  .skill-item{font-size:12.5px;color:var(--mid);transition:color .3s;display:flex;align-items:center;gap:8px;}
-  .skill-item::before{content:'';width:14px;height:1px;background:currentColor;flex-shrink:0;}
-
-  .project-item{display:grid;grid-template-columns:60px 1fr auto;gap:36px;align-items:start;padding:48px 0;border-bottom:1px solid var(--border);position:relative;}
-  .project-item::before{content:'';position:absolute;left:-52px;right:-52px;top:0;bottom:0;background:var(--black);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.77,0,.175,1);z-index:-1;}
-  .project-item:hover::before{transform:scaleX(1);}
-  .project-item:hover .project-num,.project-item:hover .project-name,.project-item:hover .project-name a,.project-item:hover .project-desc,.project-item:hover .project-tags span,.project-item:hover .project-year{color:var(--white)!important;}
-  .project-item:hover .project-tags span{border-color:rgba(255,255,255,.25);}
-  .project-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--mid);padding-top:6px;transition:color .3s;}
-  .project-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;line-height:1.1;margin-bottom:10px;transition:color .3s;}
-  .project-name a{color:inherit;text-decoration:none;}
-  .project-desc{font-size:13.5px;color:var(--mid);max-width:560px;line-height:1.8;transition:color .3s;margin-bottom:18px;}
-  .project-tags{display:flex;flex-wrap:wrap;gap:7px;}
-  .project-tags span{font-size:10px;letter-spacing:.13em;text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;color:var(--mid);transition:color .3s,border-color .3s;}
-  .project-year{font-size:12px;color:var(--mid);padding-top:8px;transition:color .3s;white-space:nowrap;}
-
-  .exp-list,.edu-list{display:flex;flex-direction:column;}
-  .exp-item,.edu-item{display:grid;grid-template-columns:220px 1fr;gap:56px;padding:50px 0;border-bottom:1px solid var(--border);}
-  .exp-period,.edu-period{font-size:12px;letter-spacing:.1em;color:var(--mid);margin-bottom:6px;}
-  .exp-subloc{font-size:12px;color:var(--mid);}
-  .exp-role,.edu-degree{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;margin-bottom:4px;}
-  .exp-company,.edu-school{font-size:13px;color:var(--mid);margin-bottom:16px;}
-  .edu-detail{font-size:13px;color:#555;line-height:1.75;}
-  .edu-badge{display:inline-block;font-size:11px;letter-spacing:.1em;border:1px solid var(--border);padding:5px 12px;color:var(--mid);margin-top:12px;}
-  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;}
-  .exp-bullets li{font-size:13px;color:#3a3a3a;display:flex;gap:12px;align-items:baseline;}
-  .exp-bullets li::before{content:'—';color:var(--mid);flex-shrink:0;}
-
-  .sub-header{display:flex;align-items:baseline;gap:20px;margin:80px 0 40px;}
-  .sub-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-weight:300;line-height:1;}
-
-  .certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-  .cert-item{background:var(--white);padding:28px 24px;transition:background .3s;}
-  .cert-item:hover{background:var(--black);}
-  .cert-item:hover .cert-name,.cert-item:hover .cert-issuer{color:var(--white);}
-  .cert-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:6px;transition:color .3s;}
-  .cert-issuer{font-size:11px;letter-spacing:.09em;color:var(--mid);line-height:1.5;transition:color .3s;}
-
-  .lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-  .lang-item{background:var(--white);padding:28px 24px;}
-  .lang-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:5px;}
-  .lang-level{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--mid);}
-  .lang-bar{height:2px;background:var(--border);margin-top:14px;}
-  .lang-fill{height:100%;background:var(--black);transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.22,1,.36,1);}
-
-  #contact{border-bottom:none;}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-  .contact-intro{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.3;font-style:italic;}
-  .contact-sub{font-size:13.5px;color:var(--mid);margin-top:20px;line-height:1.8;}
-  .contact-links{display:flex;flex-direction:column;}
-  .contact-link{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--black);}
-  .contact-link:first-child{border-top:1px solid var(--border);}
-  .contact-link-left{display:flex;align-items:center;gap:18px;}
-  .contact-link-icon{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;transition:background .3s,color .3s,border-color .3s;}
-  .contact-link:hover .contact-link-icon{background:var(--black);color:var(--white);border-color:var(--black);}
-  .contact-link-label{font-size:13.5px;}
-  .contact-link-value{font-size:11.5px;color:var(--mid);margin-top:2px;}
-  .contact-link-arrow{font-size:16px;transition:transform .3s;}
-  .contact-link:hover .contact-link-arrow{transform:translate(3px,-3px);}
-
-  footer{padding:36px 52px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
-  .footer-copy{font-size:11px;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;}
-  .footer-langs{display:flex;gap:16px;}
-  .footer-langs span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);}
-
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
-  .reveal.visible{opacity:1;transform:translateY(0);}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
-  @media(max-width:768px){
-    nav{padding:22px 22px;}
-    .nav-links{display:none;}
-    #hero{padding:0 22px 44px;}
-    .hero-side{display:none;}
-    section{padding:72px 22px;}
-    .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px;}
-    .skills-grid{grid-template-columns:1fr 1fr;}
-    .project-item{grid-template-columns:40px 1fr;}
-    .project-year{display:none;}
-    .exp-item,.edu-item{grid-template-columns:1fr;gap:10px;}
-    .certs-grid{grid-template-columns:1fr 1fr;}
-    .lang-grid{grid-template-columns:1fr 1fr;}
-    footer{padding:28px 22px;flex-direction:column;gap:10px;text-align:center;}
-  }
-</style>
 </head>
 <body>
 <div id="cursor"></div>
@@ -157,7 +24,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <span class="hero-side">Full-Stack · Functional Analyst · IT Consultant</span>
   <p class="hero-tag">Disponible immédiatement · Tunis & Remote · International</p>
@@ -172,7 +38,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="section-header reveal">
     <span class="section-num">01</span>
@@ -206,7 +71,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="section-header reveal">
     <span class="section-num">02</span>
@@ -286,7 +150,6 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="section-header reveal">
     <span class="section-num">03</span>
@@ -330,7 +193,6 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-header reveal">
     <span class="section-num">04</span>
@@ -388,7 +250,6 @@
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
   <div class="section-header reveal">
     <span class="section-num">05</span>
@@ -478,7 +339,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="section-header reveal">
     <span class="section-num">06</span>
@@ -551,31 +411,6 @@
     <span>Ar</span><span>Fr</span><span>En</span><span>Es</span><span>It</span>
   </div>
 </footer>
-
-<script>
-  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-  (function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
-  document.querySelectorAll('a,button,.skill-cat,.project-item,.cert-item,.lang-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
-  });
-
-  const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*.06+'s';revObs.observe(el);});
-
-  const barObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.querySelectorAll('.lang-fill').forEach(b=>{b.style.transitionDelay='.3s';b.style.transform=`scaleX(${b.dataset.w})`;});
-      }
-    });
-  },{threshold:.3});
-  document.querySelectorAll('.lang-grid').forEach(g=>barObs.observe(g));
-
-  const secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a');
-  new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navAs.forEach(a=>a.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:.35}).observe && secs.forEach(s=>new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navAs.forEach(a=>a.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:.35}).observe(s));
-</script>
+<script src="index.js"></script>
 </body>
 </html>
