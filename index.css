@@ -180,6 +180,53 @@
       line-height: 1.85;
   }
 
+  .hero-photo {
+    position: absolute;
+    top: 20%;
+    right: 300px;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 550px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+  
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%);
+    transition: filter .5s ease;
+  }
+  
+  .hero-photo:hover img {
+    filter: grayscale(0%);
+  }
+  
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  
+  @media(max-width: 768px) {
+    .hero-photo {
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      width: 120px;
+      height: 155px;
+      margin-bottom: 24px;
+    }
+  }
+
   .hero-cta {
       display: inline-flex;
       align-items: center;
